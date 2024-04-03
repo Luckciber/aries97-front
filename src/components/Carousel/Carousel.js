@@ -21,24 +21,28 @@ const images = [
     label: "San Francisco – Oakland Bay Bridge, United States",
     imgPath: bgImage,
     titleText: " Aries 97 te invita",
-    middleText: "A conocer su increible colección de artículos exclusivos y diseñados para tí.",
+    middleText:
+      "A conocer su increible colección de artículos exclusivos y diseñados para tí.",
   },
   {
     imgPath: bgImage2,
     titleText: " Ariesi 97 te invita",
-    middleText: "A conocer su increible colección de artículos exclusivos y diseñados para tí. cha",
+    middleText:
+      "A conocer su increible colección de artículos exclusivos y diseñados para tí. cha",
   },
   {
     label: "Bali, Indonesia",
     imgPath: bgImage,
     titleText: " Ariese 97 te invita",
-    middleText: "A conocer su increible colección de artículos exclusivos y diseñados para tí. pa",
+    middleText:
+      "A conocer su increible colección de artículos exclusivos y diseñados para tí. pa",
   },
   {
     label: "Goč, Serbia",
     imgPath: bgImage2,
     titleText: " Ariesa 97 te invita",
-    middleText: "A conocer su increible colección de artículos exclusivos y diseñados para tí. la",
+    middleText:
+      "A conocer su increible colección de artículos exclusivos y diseñados para tí. la",
   },
 ];
 
@@ -68,64 +72,78 @@ function SwipeableTextMobileStepper() {
         enableMouseEvents
       >
         {images.map((step, index) => (
-          <div key={step.label}>
+          <div key={step.label} style={{ position: "relative", height: 555 }}>
             {Math.abs(activeStep - index) <= 2 ? (
-              <Box
-                component="img"
-                sx={{
-                  height: 555,
-                  display: "block",
-                  overflow: "hidden",
-                  width: "100%",
-                  objectFit: "cover",
-                }}
-                src={step.imgPath}
-              />
+              <>
+                <Box
+                  component="img"
+                  sx={{
+                    height: "100%",
+                    display: "block",
+                    overflow: "hidden",
+                    width: "100%",
+                    objectFit: "cover",
+                  }}
+                  src={step.imgPath}
+                />
+  
+                  <Container  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                  }}>
+                    <Grid container item xs={12} lg={12} justifyContent="center">
+                      <MKTypography
+                        variant="h1"
+                        color="white"
+                        textAlign="center"
+                        px={{ xs: 12, lg: 12 }}
+                      >
+                        {step.titleText + " "}
+                      </MKTypography>
+                      <MKTypography
+                        variant="body1"
+                        color="white"
+                        textAlign="center"
+                        px={{ xs: 12, lg: 12 }}
+                        mt={1}
+                      >
+                        {step.middleText}
+                      </MKTypography>
+                    </Grid>
+                  </Container>
+              </>
             ) : null}
-            <div>
-              <Container>
-                <Grid container item xs={12} lg={7} justifyContent="center" mx="auto">
-                  <MKTypography
-                    variant="h1"
-                    color="white"
-                    mt={-6}
-                    mb={1}
-                    sx={({ breakpoints, typography: { size } }) => ({
-                      [breakpoints.down("md")]: {
-                        fontSize: size["3xl"],
-                      },
-                    })}
-                  >
-                    {step.titleText + " "}
-                  </MKTypography>
-                  <MKTypography
-                    variant="body1"
-                    color="white"
-                    textAlign="center"
-                    px={{ xs: 6, lg: 12 }}
-                    mt={1}
-                  >
-                    {step.middleText}
-                  </MKTypography>
-                </Grid>
-              </Container>
-            </div>
           </div>
         ))}
       </AutoPlaySwipeableViews>
+
       <MobileStepper
         steps={maxSteps}
         position="static"
         activeStep={activeStep}
         nextButton={
-          <Button size="small" onClick={handleNext} disabled={activeStep === maxSteps - 1}>
+          <Button
+            size="small"
+            onClick={handleNext}
+            disabled={activeStep === maxSteps - 1}
+          >
             Next
-            {theme.direction === "rtl" ? <KeyboardArrowLeft /> : <KeyboardArrowRight />}
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowLeft />
+            ) : (
+              <KeyboardArrowRight />
+            )}
           </Button>
         }
         backButton={
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
-            {theme.direction === "rtl" ? <KeyboardArrowRight /> : <KeyboardArrowLeft />}
+            {theme.direction === "rtl" ? (
+              <KeyboardArrowRight />
+            ) : (
+              <KeyboardArrowLeft />
+            )}
             Back
           </Button>
         }
